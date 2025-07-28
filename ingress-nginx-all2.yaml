@@ -67,18 +67,6 @@ metadata:
     app.kubernetes.io/part-of: ingress-nginx
 
 ---
-# Secret for Admission Webhook
-apiVersion: v1
-kind: Secret
-metadata:
-  name: ingress-nginx-admission
-  namespace: ingress-nginx
-  labels:
-    app.kubernetes.io/name: ingress-nginx
-    app.kubernetes.io/part-of: ingress-nginx
-type: Opaque
-
----
 # ClusterRole for Controller
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -402,6 +390,7 @@ spec:
         - --validating-webhook=:8443
         - --validating-webhook-certificate=/usr/local/certificates/cert
         - --validating-webhook-key=/usr/local/certificates/key
+        - --publish-service=ingress-nginx/ingress-nginx-controller
         ports:
         - name: http
           containerPort: 80
