@@ -1,0 +1,5 @@
+1. Apply the YAML: Run kubectl apply -f ingress-nginx-all2.yaml to create all resources.
+2. Verify Pods: Check that the ingress-nginx-controller pod is running in the ingress-nginx namespace (kubectl get pods -n ingress-nginx).
+3. Verify Services: Confirm the ingress-nginx-controller Service has assigned NodePorts for 80, 443, 34952, and 8180 (kubectl get svc -n ingress-nginx).
+4. Access the Ingress: Access the gcxi service via <node-ip>:<nodePort> (use the NodePort for port 80 or 443). For TCP services, use <node-ip>:34952 for mstr and <node-ip>:8180 for metrics.
+5. Check Webhook: Ensure the ingress-nginx-admission-create and ingress-nginx-admission-patch Jobs complete successfully (kubectl get jobs -n ingress-nginx).
